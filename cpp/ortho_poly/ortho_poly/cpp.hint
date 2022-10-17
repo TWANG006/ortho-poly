@@ -1,0 +1,2 @@
+#define ORTHOPOLY_API __declspec(dllexport)
+#define ORTHOPOLY_API __declspec(dllimport)
