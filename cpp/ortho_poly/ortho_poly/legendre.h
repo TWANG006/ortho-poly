@@ -1,7 +1,9 @@
 #ifndef LEGENDRE_H
 #define LEGENDRE_H
 
-class Legendre
+#include "common.h"
+
+class ORTHOPOLY_API Legendre
 {
 };
 
