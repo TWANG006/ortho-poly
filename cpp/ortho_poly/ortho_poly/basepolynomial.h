@@ -7,33 +7,28 @@
 class ORTHOPOLY_API BasePolynomial
 {
 public:
-	//! default constructor
+	//! constructors
 	BasePolynomial() = default;
-
-	//! construct with the Cartesian X, Y coordinates
 	BasePolynomial(
 		const MatrixXXd& X,/*!< [in] X coordinates*/
 		const MatrixXXd& Y /*!< [in] Y coordinates*/
 	);
-
-	//! construct with the X, Y, order and coefficients
 	BasePolynomial(
 		const MatrixXXd& X, /*!< X coordinates*/
 		const MatrixXXd& Y, /*!< Y coordinates*/
 		const VectorXd& j , /*!< order vector of the polynomials*/
 		const VectorXd& c   /*!< coefficients for each order*/
 	);
-
-	//! copy constructor
 	BasePolynomial(const BasePolynomial& bp);
-
-	//! copy assignment
 	BasePolynomial& operator = (const BasePolynomial& bp);
 
 	virtual ~BasePolynomial();
 
 public:
-	
+	//! interface methods
+	virtual BasePolynomial& normalize(const MatrixXXd& X, const MatrixXXd& Y) = 0;
+
+protected:
 
 protected:
 	MatrixXXd m_X; /*!< Cartesian X */
