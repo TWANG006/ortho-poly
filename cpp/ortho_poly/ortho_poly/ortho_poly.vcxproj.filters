@@ -36,6 +36,9 @@
     <ClInclude Include="basepolynomial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Zonal-wavefront-reconstruction-in-quadrilateral-geometry\cpp\wavefront_reconstruction\matrix_io.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
