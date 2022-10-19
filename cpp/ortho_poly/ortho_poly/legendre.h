@@ -2,8 +2,9 @@
 #define LEGENDRE_H
 
 #include "common.h"
+#include "basepolynomial.h"
 
-class ORTHOPOLY_API Legendre
+class ORTHOPOLY_API Legendre : public BasePolynomial
 {
 };
 

@@ -33,6 +33,9 @@
     <ClInclude Include="legendre.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="basepolynomial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -45,6 +48,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="legendre.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="basepolynomial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
