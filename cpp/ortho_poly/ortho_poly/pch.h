@@ -12,6 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <functional>
+#include <tuple>
 #include <Eigen/Sparse>
 #include <Eigen/Dense>
 #include <Eigen/IterativeLinearSolvers>
