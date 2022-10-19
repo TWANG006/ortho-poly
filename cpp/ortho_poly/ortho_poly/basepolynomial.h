@@ -32,6 +32,9 @@ public:
 
 	virtual ~BasePolynomial();
 
+public:
+	
+
 protected:
 	MatrixXXd m_X; /*!< Cartesian X */
 	MatrixXXd m_Y; /*!< Cartesian Y*/
