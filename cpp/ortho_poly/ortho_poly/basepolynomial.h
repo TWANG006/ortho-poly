@@ -25,6 +25,11 @@ public:
 	virtual ~BasePolynomial();
 
 public:
+	//! Getters, for debug only. Will be deleted later.
+	const MatrixXXd& GetX() const { return m_X; }
+	const MatrixXXd& GetY() const { return m_Y; }
+
+public:
 	//! interface methods
 	virtual BasePolynomial& normalize(const MatrixXXd& X, const MatrixXXd& Y) = 0;
 

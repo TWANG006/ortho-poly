@@ -1,0 +1,35 @@
+function show_surface(X, Y, Z, unit, unit_str, title)
+
+X = X * 1e3;
+Y = Y * 1e3;
+Z = Z * unit;
+
+ratio = (max(X(:)) - min(X(:))) / (max(Y(:)) - min(Y(:)));
+
+if (is_removed == true)
+    Z_nm = remove_surface_1st_order(X_mm, Y_mm, Z_nm);
+end
+
+% display the map
+s = surf(X_mm, Y_mm, Z_nm, 'EdgeColor', 'none'); hold on;
+p = pcolor(X, Y, Z); p.EdgeC
+% axis xy image; 
+axis(gca, ax);
+axis(gca, 'tight');
+c = colorbar;
+c.Label.String = unit_str;
+if color_range > 0
+    caxis([-1, 1]*color_range);
+end
+title({title_str,...
+      [' PV = ' num2str(round(SmartPTV(Z_nm(:)), round_n)) ' ' unit_str ', RMS = ' num2str(round(nanstd(Z_nm(:),1), round_n)) ' ' unit_str]},...
+    'FontWeight', 'normal',...
+    'FontSize', 12 ...
+);
+xlabel('x [mm]', 'FontSize', 12);
+ylabel('y [mm]', 'FontSize', 12);
+colormap(gca, color_map);
+shading(gca, shade);
+pbaspect([ratio, 1, 1]);
+
+end
