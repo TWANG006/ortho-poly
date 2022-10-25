@@ -11,8 +11,10 @@ public:
 	BasePolynomial() = default;
 	BasePolynomial(const BasePolynomial& bp) = default;
 	BasePolynomial& operator = (const BasePolynomial& bp) = default;
-
 	virtual ~BasePolynomial();
+
+	virtual BasePolynomial& operator() (const MatrixXXd& X, const MatrixXXd& Y);
+	virtual BasePolynomial& operator() (const VectorXd& x);
 
 public:
 	//! Getters, for debug only. Will be deleted later.
@@ -22,6 +24,8 @@ public:
 public:
 	//! interface methods
 	virtual BasePolynomial& normalize(const MatrixXXd& X, const MatrixXXd& Y) = 0;
+	virtual BasePolynomial& normalize(const VectorXd& x) = 0;
+	virtual std::vector<VectorXd> gen_1d_poly(vec_i& orders) = 0;
 
 protected:
 	VectorXd m_x;/*!< 1d Cartesian coordinates*/

@@ -12,3 +12,18 @@ Legendre& Legendre::normalize(const MatrixXXd& X, const MatrixXXd& Y)
 	
 	return *this;
 }
+
+Legendre& Legendre::normalize(const VectorXd& x)
+{
+	m_x = (-1 + 2 * (x.array() - x.minCoeff()) / (x.maxCoeff() - x.minCoeff())).matrix();
+
+	return *this;
+}
+
+std::vector<VectorXd> Legendre::gen_1d_poly(vec_i& orders)
+{
+	// sort the orders
+	std::stable_sort(orders.begin(), orders.end());
+
+	// grab the largest order
+}

@@ -14,7 +14,8 @@ using VectorXd = Eigen::VectorXd;
 using VectorXi = Eigen::VectorXi;
 using VectorMapd = Eigen::Map<VectorXd, Eigen::Unaligned>;
 using vec_d = std::vector<double>;
-using map_id = std::map<int, double>;
+using vec_i = std::vector<int_t>;
+using map_id = std::map<int_t, double>;
 
 inline int_t ID_1D(int_t x, int_t y, int_t width) { return (y * width + x); }
 
