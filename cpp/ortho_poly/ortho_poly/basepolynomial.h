@@ -9,18 +9,8 @@ class ORTHOPOLY_API BasePolynomial
 public:
 	//! constructors
 	BasePolynomial() = default;
-	BasePolynomial(
-		const MatrixXXd& X,/*!< [in] X coordinates*/
-		const MatrixXXd& Y /*!< [in] Y coordinates*/
-	);
-	BasePolynomial(
-		const MatrixXXd& X,/*!< [in] X coordinates*/
-		const MatrixXXd& Y,/*!< [in] Y coordinates*/
-		const VectorXd& j ,/*!< [in] order vector of the polynomials*/
-		const VectorXd& c  /*!< [in] coefficients for each order*/
-	);
-	BasePolynomial(const BasePolynomial& bp);
-	BasePolynomial& operator = (const BasePolynomial& bp);
+	BasePolynomial(const BasePolynomial& bp) = default;
+	BasePolynomial& operator = (const BasePolynomial& bp) = default;
 
 	virtual ~BasePolynomial();
 
@@ -34,10 +24,10 @@ public:
 	virtual BasePolynomial& normalize(const MatrixXXd& X, const MatrixXXd& Y) = 0;
 
 protected:
-	MatrixXXd m_X;/*!< Cartesian X */
-	MatrixXXd m_Y;/*!< Cartesian Y*/
-	VectorXd m_j; /*!< Orders*/
-	VectorXd m_c; /*!< Coefficients*/
+	VectorXd m_x;/*!< 1d Cartesian coordinates*/
+	MatrixXXd m_X;/*!< 2d Cartesian X */
+	MatrixXXd m_Y;/*!< 2d Cartesian Y*/
+	map_id m_order_coeff_map;/*!< ordered (order, coeff) pair*/
 };
 
 #endif // !BASE_POLYNOMIAL_H
