@@ -15,6 +15,7 @@
 #include <numeric>
 #include <tuple>
 #include <map>
+#include <unordered_map>
 #include <Eigen/Sparse>
 #include <Eigen/Dense>
 #include <Eigen/IterativeLinearSolvers>
