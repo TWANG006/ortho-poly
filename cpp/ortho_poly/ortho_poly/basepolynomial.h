@@ -27,6 +27,7 @@ public:
 	virtual BasePolynomial& normalize(const VectorXd& x) = 0;
 	virtual vec_v gen_1d_p(vec_i& orders) = 0;
 	virtual std::tuple<vec_v, vec_v> gen_1d_p_dp(vec_i& orders) = 0;
+	virtual vec_m gen_2d_p(set_i& j_orders) = 0;
 
 protected:
 	VectorXd m_x;/*!< 1d Cartesian coordinates*/

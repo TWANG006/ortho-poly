@@ -21,6 +21,9 @@ public:
 	/*! 1D methods*/
 	virtual vec_v gen_1d_p(vec_i& orders) override;
 	virtual std::tuple<vec_v, vec_v> gen_1d_p_dp(vec_i& orders) override;
+
+	/*! 2D methods*/
+	virtual vec_m gen_2d_p(set_i& j_orders) override;
 };
 
 #endif // !LEGENDRE_H

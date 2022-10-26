@@ -137,3 +137,36 @@ std::tuple<vec_v, vec_v> Legendre::gen_1d_p_dp(vec_i& orders)
 
 	return std::make_tuple(p, dp);
 }
+
+vec_m Legendre::gen_2d_p(set_i& j_orders)
+{
+	// obtain the orders for x & y, respectively
+	vec_i x_orders, y_orders;
+	x_orders.reserve(j_orders.size());
+	y_orders.reserve(j_orders.size());
+
+	for (const auto& j : j_orders) {
+		auto b = int_t(ceil(sqrt(double(j))));
+		auto a = b * b - j + 1;
+
+		auto nsm = -a / 2 * (!(a % 2)) + (a - 1) / 2 * (a % 2);
+		auto nam = 2 * b - abs(nsm) - 2;
+
+		x_orders.push_back((nam + nsm) / 2);
+		y_orders.push_back((nam - nsm) / 2);
+	}
+
+	// obtain the 1d polynomials in x and y, respectively
+	auto p_x = (*this)(m_X.row(0)).gen_1d_p(x_orders);
+	auto p_y = (*this)(m_Y.col(0)).gen_1d_p(y_orders);
+
+	// get the 2d polynomials: multiply each of the x & y corresponding polynomials
+	vec_m P;
+	P.reserve(j_orders.size());
+	for (auto i = 0; i < p_x.size(); i++) {
+		P.push_back(p_y[i] * p_x[i].transpose());
+	}
+
+	// output the 2d polynomials
+	return P;
+}

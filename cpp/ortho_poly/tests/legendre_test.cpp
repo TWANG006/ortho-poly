@@ -67,3 +67,28 @@ TEST(Legendre, gen_1d_p_dp)
 		std::cout << i.transpose() << std::endl;
 	}
 }
+
+TEST(Legendre, gen_2d_p)
+{
+	// without normalization
+	std::cout << "Calculation only" << std::endl;
+	Legendre lg;
+	MatrixXXd X(3, 3), Y(3, 3);
+	X << -1, 0, 1,
+		 -1, 0, 1,
+		 -1, 0, 1;
+	Y << 1, 1, 1,
+		 0, 0, 0,
+		-1, -1, -1;
+	vec_m polys = lg(X, Y).gen_2d_p(set_i({ 1, 2, 3}));
+	for (const auto& i : polys) {
+		std::cout << i << std::endl;
+	}
+
+	//// with normalization
+	//std::cout << "Normalization then calculation" << std::endl;
+	//polys = lg.normalize(x_norm).gen_1d_p(vec_i{ 0, 0, 1, 1, 2, 3, 4, 5 });
+	//for (const auto& i : polys) {
+	//	std::cout << i.transpose() << std::endl;
+	//}
+}
