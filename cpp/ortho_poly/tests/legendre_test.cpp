@@ -29,3 +29,24 @@ TEST(Legendre, normalize)
 	free(Y); Y = nullptr;
 	free(Z); Z = nullptr;
 }
+
+TEST(Legendre, gen_1d_poly)
+{
+	// without normalization
+	std::cout << "Calculation only" << std::endl;
+	Legendre lg;
+	VectorXd x(3), x_norm(3);
+	x << -1, 0, 1;
+	x_norm << -2, 0, 2;
+	auto polys = lg(x).gen_1d_poly(vec_i{ 0, 0, 1, 1, 1, 2, 2, 4});
+	for (const auto& i : polys) {
+		std::cout << i.transpose() << std::endl;
+	}
+
+	// with normalization
+	std::cout << "Normalization then calculation" << std::endl;
+	polys = lg.normalize(x_norm).gen_1d_poly(vec_i{ 0, 0, 1, 1, 2, 3, 4, 5 });
+	for (const auto& i : polys) {
+		std::cout << i.transpose() << std::endl;
+	}
+}
