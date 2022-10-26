@@ -19,10 +19,8 @@ public:
 	virtual Legendre& normalize(const VectorXd& x) override;
 
 	/*! 1D methods*/
-	virtual std::vector<VectorXd> gen_1d_poly(vec_i& orders) override;
+	virtual vec_v gen_1d_p(vec_i& orders) override;
+	virtual std::tuple<vec_v, vec_v> gen_1d_p_dp(vec_i& orders) override;
 };
 
 #endif // !LEGENDRE_H
-
-
-

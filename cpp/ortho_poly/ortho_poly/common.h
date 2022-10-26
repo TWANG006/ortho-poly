@@ -14,6 +14,7 @@ using VectorXd = Eigen::VectorXd;
 using VectorXi = Eigen::VectorXi;
 using VectorMapd = Eigen::Map<VectorXd, Eigen::Unaligned>;
 using vec_d = std::vector<double>;
+using vec_v = std::vector<VectorXd>;
 using vec_i = std::vector<int_t>;
 using map_id = std::map<int_t, double>;
 using map_iv = std::map<int_t, VectorXd>;
