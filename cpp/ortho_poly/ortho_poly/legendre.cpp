@@ -111,21 +111,29 @@ std::tuple<vec_v, vec_v> Legendre::gen_1d_p_dp(vec_i& orders)
 	for (auto i = 2; i <= max_order; i++) {
 		double n = double(i - 1);
 		p2 = (2 * n + 1) / (n + 1) * m_x.cwiseProduct(p1) - n / (n + 1) * p0;
+		dp2 = (2 * n + 1) / (n + 1) * (p1 + m_x.cwiseProduct(dp1)) - n / (n + 1) * dp0;
 
 		// save p2 if required
 		if (order_p_map.find(i) != order_p_map.end()) {
 			order_p_map[i] = p2;
 		}
+		if (order_dp_map.find(i) != order_dp_map.end()) {
+			order_dp_map[i] = dp2;
+		}
 
 		// switch p0 and p1
 		p0 = p1;
 		p1 = p2;
+
+		dp0 = dp1;
+		dp1 = dp2;
 	}
 
 	// build the polynomial vectors
 	for (const auto& i : orders) {
 		p.push_back(order_p_map[i]);
+		dp.push_back(order_dp_map[i]);
 	}
 
-	return std::tuple<vec_v, vec_v>();
+	return std::make_tuple(p, dp);
 }
