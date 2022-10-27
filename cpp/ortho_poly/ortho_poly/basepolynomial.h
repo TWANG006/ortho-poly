@@ -25,7 +25,6 @@ public:
 	const MatrixXXd& GetX() const { return m_X; }
 	const MatrixXXd& GetY() const { return m_Y; }
 
-
 public:
 	//! interface methods
 	virtual BasePolynomial& normalize(const MatrixXXd& X, const MatrixXXd& Y) = 0;
@@ -34,6 +33,9 @@ public:
 	virtual std::tuple<vec_v, vec_v> gen_1d_p_dp(vec_i& orders) = 0;
 	virtual vec_m gen_2d_p(const set_i& j_orders) = 0;
 	virtual std::tuple<MatrixXXd, vec_m> gen_2d_p(const map_id& jorder_coeff) = 0;
+
+private:
+	std::tuple<MatrixXXd, VectorXd> _build_Axb(const vec_m& Ps, const MatrixXXd& Z);
 
 protected:
 	VectorXd m_x;/*!< 1d Cartesian coordinates*/
