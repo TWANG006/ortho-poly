@@ -23,7 +23,9 @@ public:
 	virtual std::tuple<vec_v, vec_v> gen_1d_p_dp(vec_i& orders) override;
 
 	/*! 2D methods*/
-	virtual vec_m gen_2d_p(set_i& j_orders) override;
+	virtual vec_m gen_2d_p(const set_i& j_orders) override;
+	virtual std::tuple<MatrixXXd, vec_m> gen_2d_p(const map_id& jorder_coeff) override;
+
 };
 
 #endif // !LEGENDRE_H

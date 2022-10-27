@@ -16,6 +16,7 @@
 #include <tuple>
 #include <map>
 #include <set>
+#include <execution>
 #include <unordered_map>
 #include <Eigen/Sparse>
 #include <Eigen/Dense>

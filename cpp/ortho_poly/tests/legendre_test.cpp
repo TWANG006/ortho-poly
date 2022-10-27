@@ -3,7 +3,7 @@
 #include "../ortho_poly/legendre.h"
 #include "../ortho_poly/matrix_io.h"
 
-TEST(Legendre, normalize) 
+TEST(Legendre, normalize)
 {
 	// load data
 	int rows = 0, cols = 0;
@@ -21,7 +21,7 @@ TEST(Legendre, normalize)
 
 	Legendre lg;
 	lg.normalize(Xmap, Ymap);
-	
+
 	write_matrix_to_disk("../../../data/X_lg.bin", rows, cols, lg.GetX().data());
 	write_matrix_to_disk("../../../data/Y_lg.bin", rows, cols, lg.GetY().data());
 
@@ -38,7 +38,7 @@ TEST(Legendre, gen_1d_p)
 	VectorXd x(3), x_norm(3);
 	x << -1, 0, 1;
 	x_norm << -2, 0, 2;
-	auto polys = lg(x).gen_1d_p(vec_i{ 2, 2, 4});
+	auto polys = lg(x).gen_1d_p(vec_i{ 2, 1, 0, 1, 4 });
 	for (const auto& i : polys) {
 		std::cout << i.transpose() << std::endl;
 	}
@@ -75,15 +75,27 @@ TEST(Legendre, gen_2d_p)
 	Legendre lg;
 	MatrixXXd X(3, 3), Y(3, 3);
 	X << -1, 0, 1,
-		 -1, 0, 1,
-		 -1, 0, 1;
+		-1, 0, 1,
+		-1, 0, 1;
 	Y << 1, 1, 1,
-		 0, 0, 0,
+		0, 0, 0,
 		-1, -1, -1;
-	vec_m polys = lg(X, Y).gen_2d_p(set_i({ 1, 2, 3}));
+	vec_m polys = lg(X, Y).gen_2d_p(set_i({ 1, 2, 3 }));
+
+	// with combined polynomial
+	auto [P, Ps] = lg(X, Y).gen_2d_p({
+		{ 1, 1},
+		{ 2, 1 },
+		{ 3, 1 },
+		}
+	);
+	std::cout << "Individual Polynomials: " << std::endl;
 	for (const auto& i : polys) {
 		std::cout << i << std::endl;
 	}
+	std::cout << "Combined Polynomial: " << std::endl;
+	std::cout << P << std::endl;
+
 
 	//// with normalization
 	//std::cout << "Normalization then calculation" << std::endl;

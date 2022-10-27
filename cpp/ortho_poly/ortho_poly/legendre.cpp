@@ -138,7 +138,45 @@ std::tuple<vec_v, vec_v> Legendre::gen_1d_p_dp(vec_i& orders)
 	return std::make_tuple(p, dp);
 }
 
-vec_m Legendre::gen_2d_p(set_i& j_orders)
+std::tuple<MatrixXXd, vec_m> Legendre::gen_2d_p(const map_id& jorder_coeff)
+{
+	// obtain the orders for x & y, respectively
+	vec_i x_orders, y_orders;
+	vec_d coeffs;
+	x_orders.reserve(jorder_coeff.size());
+	y_orders.reserve(jorder_coeff.size());
+	coeffs.reserve(jorder_coeff.size());
+
+	for (const auto& jc : jorder_coeff) {
+		auto b = int_t(ceil(sqrt(double(jc.first))));
+		auto a = b * b - jc.first + 1;
+
+		auto nsm = -a / 2 * ((a % 2) == 0 ? 1 : 0) + (a - 1) / 2 * (a % 2);
+		auto nam = 2 * b - abs(nsm) - 2;
+
+		x_orders.push_back((nam + nsm) / 2);
+		y_orders.push_back((nam - nsm) / 2);
+		coeffs.push_back(jc.second);
+	}
+
+	// obtain the 1d polynomials in x and y, respectively
+	auto p_x = (*this)(m_X.row(0)).gen_1d_p(x_orders);
+	auto p_y = (*this)(m_Y.col(0)).gen_1d_p(y_orders);
+
+	// get the 2d polynomials: multiply each of the 
+	// x & y corresponding polynomials and coefficients
+	vec_m Ps(jorder_coeff.size(), MatrixXXd());
+	MatrixXXd P = MatrixXXd::Zero(m_X.rows(), m_X.cols());
+	Ps.reserve(jorder_coeff.size());
+	for (auto i = 0; i < p_x.size(); i++) {
+		Ps[i] = p_y[i] * p_x[i].transpose();
+		P += coeffs[i] * Ps[i];
+	}
+
+	return std::make_tuple(P, Ps);
+}
+
+vec_m Legendre::gen_2d_p(const set_i& j_orders)
 {
 	// obtain the orders for x & y, respectively
 	vec_i x_orders, y_orders;
@@ -149,7 +187,7 @@ vec_m Legendre::gen_2d_p(set_i& j_orders)
 		auto b = int_t(ceil(sqrt(double(j))));
 		auto a = b * b - j + 1;
 
-		auto nsm = -a / 2 * (!(a % 2)) + (a - 1) / 2 * (a % 2);
+		auto nsm = -a / 2 * ((a % 2) == 0 ? 1 : 0) + (a - 1) / 2 * (a % 2);
 		auto nam = 2 * b - abs(nsm) - 2;
 
 		x_orders.push_back((nam + nsm) / 2);
@@ -161,12 +199,12 @@ vec_m Legendre::gen_2d_p(set_i& j_orders)
 	auto p_y = (*this)(m_Y.col(0)).gen_1d_p(y_orders);
 
 	// get the 2d polynomials: multiply each of the x & y corresponding polynomials
-	vec_m P;
-	P.reserve(j_orders.size());
+	vec_m Ps;
+	Ps.reserve(j_orders.size());
 	for (auto i = 0; i < p_x.size(); i++) {
-		P.push_back(p_y[i] * p_x[i].transpose());
+		Ps.push_back(p_y[i] * p_x[i].transpose());
 	}
 
 	// output the 2d polynomials
-	return P;
+	return Ps;
 }
