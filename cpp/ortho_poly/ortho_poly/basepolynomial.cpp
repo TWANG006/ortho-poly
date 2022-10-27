@@ -18,3 +18,9 @@ BasePolynomial& BasePolynomial::operator()(const VectorXd& x)
 	m_x = x;
 	return *this;
 }
+
+BasePolynomial& BasePolynomial::fit(const MatrixXXd& Z, const set_i& j_orders)
+{
+
+	return *this;
+}

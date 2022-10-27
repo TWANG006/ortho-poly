@@ -17,9 +17,14 @@ public:
 	virtual BasePolynomial& operator() (const VectorXd& x);
 
 public:
+	//! common methods
+	BasePolynomial& fit(const MatrixXXd& Z, const set_i& j_orders);
+
+public:
 	//! Getters, for debug only. Will be deleted later.
 	const MatrixXXd& GetX() const { return m_X; }
 	const MatrixXXd& GetY() const { return m_Y; }
+
 
 public:
 	//! interface methods
