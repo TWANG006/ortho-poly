@@ -35,7 +35,7 @@ public:
 	virtual std::tuple<MatrixXXd, vec_m> gen_2d_p(const map_id& jorder_coeff) = 0;
 
 private:
-	std::tuple<MatrixXXd, VectorXd> _build_Axb(const vec_m& Ps, const MatrixXXd& Z);
+	void _build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z);
 
 protected:
 	VectorXd m_x;/*!< 1d Cartesian coordinates*/
@@ -45,6 +45,3 @@ protected:
 };
 
 #endif // !BASE_POLYNOMIAL_H
-
-
-

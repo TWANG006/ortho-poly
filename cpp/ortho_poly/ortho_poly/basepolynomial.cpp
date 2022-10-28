@@ -24,21 +24,39 @@ BasePolynomial& BasePolynomial::fit(const MatrixXXd& Z, const set_i& j_orders)
 	// generate the polynomials of the j_orders
 	auto Ps = gen_2d_p(j_orders);
 
-	// build the Ax = b system
+	// build and solve the Ax = b system
 
 
 	return *this;
 }
 
-std::tuple<MatrixXXd, VectorXd> BasePolynomial::_build_Axb(const vec_m& Ps, const MatrixXXd& Z)
+void BasePolynomial::_build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z)
 {
+	// reserve A and b to the largest sizes
+	vec_d A, b;
+	A.reserve(Z.size() * Ps.size());
+	b.reserve(Z.size());
+
+	// build A and b
 	for (auto i = 0; i < Z.rows(); i++) {
 		for (auto j = 0; j < Z.cols(); j++) {
-			if (isfinite(Z)) {
-
+			if (isfinite(Z(i, j))) {
+				// build one row of A
+				for (const auto& P : Ps) {
+					A.push_back(P(i, j));
+				}
+				// build one element of b
+				b.push_back(Z(i, j));
 			}
 		}
 	}
 
-	return std::tuple<MatrixXXd, VectorXd>();
+	// map the A and b
+	auto m = b.size();
+	auto n = A.size() / m;
+	MatrixMapd Amap(A.data(), m, n);
+	VectorMapd bmap(b.data(), m, n);
+
+	// solve the Ax = b
+	Amap.colPivHouseholderQr().solve(bmap);
 }

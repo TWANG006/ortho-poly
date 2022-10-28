@@ -13,6 +13,7 @@ using MatrixXXd = Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::R
 using VectorXd = Eigen::VectorXd;
 using VectorXi = Eigen::VectorXi;
 using VectorMapd = Eigen::Map<VectorXd, Eigen::Unaligned>;
+using MatrixMapd = Eigen::Map<MatrixXXd, Eigen::Unaligned>;
 using vec_i = std::vector<int_t>;
 using set_i = std::set<int_t>;
 using vec_d = std::vector<double>;
