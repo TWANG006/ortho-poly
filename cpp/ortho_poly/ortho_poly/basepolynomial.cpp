@@ -37,6 +37,17 @@ BasePolynomial& BasePolynomial::fit(const MatrixXXd& Z, const set_i& j_orders)
 	return *this;
 }
 
+MatrixXXd BasePolynomial::predict()
+{
+	auto [Zfit, Ps] = gen_2d_p(m_order_coeff_map);
+	return Zfit;
+}
+
+MatrixXXd BasePolynomial::fit_predict(const MatrixXXd& Z, const set_i& j_orders)
+{
+	return fit(Z, j_orders).predict();
+}
+
 VectorXd BasePolynomial::_build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z)
 {
 	// reserve A and b to the largest sizes

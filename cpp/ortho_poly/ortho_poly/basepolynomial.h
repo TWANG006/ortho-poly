@@ -19,6 +19,8 @@ public:
 public:
 	//! common methods
 	BasePolynomial& fit(const MatrixXXd& Z, const set_i& j_orders);
+	MatrixXXd predict();
+	MatrixXXd fit_predict(const MatrixXXd& Z, const set_i& j_orders);
 
 public:
 	//! Getters, for debug only. Will be deleted later.

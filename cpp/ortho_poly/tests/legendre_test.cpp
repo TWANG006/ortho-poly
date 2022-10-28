@@ -122,12 +122,14 @@ TEST(Legendre, fitting_2d)
 	Eigen::Map<MatrixXXd> Zmap(Z, rows, cols);
 
 	Legendre lg;
-	lg.normalize(Xmap, Ymap).fit(Zmap, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16});
+	auto j_orders = set_i{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+	lg.normalize(Xmap, Ymap).fit(Zmap, j_orders);
 	auto coeffs = lg.coeffs();
 	for (const auto& jc : coeffs) {
 		std::cout << jc.first << ", " << jc.second << std::endl;
 	}
-	auto [Zfit, Ps] = lg.gen_2d_p(coeffs);
+
+	auto Zfit = lg.normalize(Xmap, Ymap).fit_predict(Zmap, j_orders);
 
 	write_matrix_to_disk("../../../data/Zfit.bin", Zfit.rows(), Zfit.cols(), Zfit.data());
 
