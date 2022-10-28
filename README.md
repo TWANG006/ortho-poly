@@ -9,6 +9,10 @@ This project provides both the MATLAB and C++ implementaitons of the orthorgonal
 ### Legendre polynomial fitting
 ![Legendre polynomial fitting example](/images/legendre_fitting_example.jpg)
 
+## Collaborators
+<!-- readme: collaborators -start -->
+<!-- readme: collaborators -end -->
+
 ## References
 [1] [Virendra N. Mahajan, "Orthonormal aberration polynomials for anamorphic optical imaging systems with rectangular pupils," Appl. Opt. 49, 6924-6929 (2010)](https://doi.org/10.1364/AO.49.006924)
 
