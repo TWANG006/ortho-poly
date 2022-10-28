@@ -104,3 +104,34 @@ TEST(Legendre, gen_2d_p)
 	//	std::cout << i.transpose() << std::endl;
 	//}
 }
+
+TEST(Legendre, fitting_2d)
+{
+	// load data
+	int rows = 0, cols = 0;
+	double* X = nullptr;
+	double* Y = nullptr;
+	double* Z = nullptr;
+
+	read_matrix_from_disk("../../../data/X_legendre.bin", &rows, &cols, &X);
+	read_matrix_from_disk("../../../data/Y_legendre.bin", &rows, &cols, &Y);
+	read_matrix_from_disk("../../../data/Z_legendre.bin", &rows, &cols, &Z);
+
+	Eigen::Map<MatrixXXd> Xmap(X, rows, cols);
+	Eigen::Map<MatrixXXd> Ymap(Y, rows, cols);
+	Eigen::Map<MatrixXXd> Zmap(Z, rows, cols);
+
+	Legendre lg;
+	lg.normalize(Xmap, Ymap).fit(Zmap, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16});
+	auto coeffs = lg.coeffs();
+	for (const auto& jc : coeffs) {
+		std::cout << jc.first << ", " << jc.second << std::endl;
+	}
+	auto [Zfit, Ps] = lg.gen_2d_p(coeffs);
+
+	write_matrix_to_disk("../../../data/Zfit.bin", Zfit.rows(), Zfit.cols(), Zfit.data());
+
+	free(X); X = nullptr;
+	free(Y); Y = nullptr;
+	free(Z); Z = nullptr;
+}

@@ -24,6 +24,7 @@ public:
 	//! Getters, for debug only. Will be deleted later.
 	const MatrixXXd& GetX() const { return m_X; }
 	const MatrixXXd& GetY() const { return m_Y; }
+	const map_id& coeffs() const { return m_order_coeff_map; }
 
 public:
 	//! interface methods

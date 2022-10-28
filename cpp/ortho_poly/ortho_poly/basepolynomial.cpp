@@ -65,5 +65,6 @@ VectorXd BasePolynomial::_build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z)
 	VectorMapd bmap(b.data(), m, n);
 
 	// solve the Ax = b
-	return Amap.colPivHouseholderQr().solve(bmap);
+	//return Amap.colPivHouseholderQr().solve(bmap);
+	return Amap.fullPivHouseholderQr().solve(bmap);
 }

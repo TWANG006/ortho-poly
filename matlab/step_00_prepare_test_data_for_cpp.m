@@ -11,7 +11,7 @@ legendre_file = 'square_surface_60mm.mat';
 load([data_dir legendre_file]); % load the data
 
 % downsample the data
-n = 3;
+n = 1;
 X = X(1: n: end, 1: n: end);
 Y = Y(1: n: end, 1: n: end);
 Z = Z(1: n: end, 1: n: end);
