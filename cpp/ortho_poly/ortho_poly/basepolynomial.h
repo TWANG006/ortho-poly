@@ -35,7 +35,7 @@ public:
 	virtual std::tuple<MatrixXXd, vec_m> gen_2d_p(const map_id& jorder_coeff) = 0;
 
 private:
-	void _build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z);
+	VectorXd _build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z);
 
 protected:
 	VectorXd m_x;/*!< 1d Cartesian coordinates*/

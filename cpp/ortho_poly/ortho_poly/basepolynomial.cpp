@@ -25,12 +25,19 @@ BasePolynomial& BasePolynomial::fit(const MatrixXXd& Z, const set_i& j_orders)
 	auto Ps = gen_2d_p(j_orders);
 
 	// build and solve the Ax = b system
+	auto coeffs = _build_solve_Axb(Ps, Z);
 
+	// update the (j, c) map member
+	m_order_coeff_map.clear();
+	int_t id = 0;
+	for (const auto& j : j_orders) {
+		m_order_coeff_map[j] = coeffs[id++];
+	}
 
 	return *this;
 }
 
-void BasePolynomial::_build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z)
+VectorXd BasePolynomial::_build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z)
 {
 	// reserve A and b to the largest sizes
 	vec_d A, b;
@@ -58,5 +65,5 @@ void BasePolynomial::_build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z)
 	VectorMapd bmap(b.data(), m, n);
 
 	// solve the Ax = b
-	Amap.colPivHouseholderQr().solve(bmap);
+	return Amap.colPivHouseholderQr().solve(bmap);
 }
