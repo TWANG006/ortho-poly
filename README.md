@@ -1,8 +1,12 @@
 ## ortho-poly
 
 This project provides the orthorgonal polynomial implementations, including
-1. Legendre polynomials
-2. Zernike polynomials
+  - [x] Legendre polynomials
+  - [ ] Zernike polynomials
 
-## Example
-![Legendre polynomial fitting example](/image/legendre_fitting_example.jpg)
+## Examples
+### Legendre polynomial fitting
+![Legendre polynomial fitting example](/images/legendre_fitting_example.jpg)
+
+## References
+[1] [Virendra N. Mahajan, "Orthonormal aberration polynomials for anamorphic optical imaging systems with rectangular pupils," Appl. Opt. 49, 6924-6929 (2010)](https://doi.org/10.1364/AO.49.006924)
