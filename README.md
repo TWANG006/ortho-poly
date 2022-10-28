@@ -11,6 +11,16 @@ This project provides both the MATLAB and C++ implementaitons of the orthorgonal
 
 ## Collaborators
 <!-- readme: collaborators -start -->
+<table>
+<tr>
+    <td align="center">
+        <a href="https://github.com/TWANG006">
+            <img src="https://avatars.githubusercontent.com/u/10113392?v=4" width="100;" alt="TWANG006"/>
+            <br />
+            <sub><b>Tianyi Wang</b></sub>
+        </a>
+    </td></tr>
+</table>
 <!-- readme: collaborators -end -->
 
 ## References
