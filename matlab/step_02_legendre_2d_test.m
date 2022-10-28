@@ -29,3 +29,11 @@ subplot(2, 2, 3);
 show_surface(X, Y, Zfit_c, 1e9, 'nm', 'C++');
 subplot(2, 2, 4);
 show_surface(X, Y, Zfit - Zfit_c, 1e9, 'nm', 'Difference');
+
+figure;
+subplot(1, 3, 1);
+show_surface(X, Y, Z, 1e9, 'nm', 'Input surface');
+subplot(1, 3, 2);
+show_surface(X, Y, Zfit_c, 1e9, 'nm', 'Fitted with 16-order Legendre polynomials');
+subplot(1, 3, 3);
+show_surface(X, Y, Zfit - Z, 1e9, 'nm', 'Difference');
