@@ -1,6 +1,6 @@
 ## ortho-poly
 
-This project provides the orthorgonal polynomial implementations, including
+This project provides both the MATLAB and C++ implementaitons of the orthorgonal polynomials, including
   - [x] Legendre polynomials
   - [ ] Zernike polynomials
 
