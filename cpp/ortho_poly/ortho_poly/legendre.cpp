@@ -160,8 +160,8 @@ std::tuple<MatrixXXd, vec_m> Legendre::gen_2d_p(const map_id& jorder_coeff)
 		int_t a = int_t(floor((1 + sqrt(1 + 8.0 * (jc.first - 1))) * 0.5));
 		int_t b = (jc.first - 1) - (a * (a - 1)) / 2 + 1;
 
-		x_orders.push_back(b - 1);
-		y_orders.push_back(a - b);
+		y_orders.push_back(b - 1);
+		x_orders.push_back(a - b);
 
 		coeffs.push_back(jc.second);
 	}
@@ -202,8 +202,8 @@ vec_m Legendre::gen_2d_p(const set_i& j_orders)
 		int_t a = int_t(floor((1 + sqrt(1 + 8.0 * (j - 1))) * 0.5));
 		int_t b = (j - 1) - (a * (a - 1)) / 2 + 1;
 
-		x_orders.push_back(b - 1);
-		y_orders.push_back(a - b);
+		y_orders.push_back(b - 1);
+		x_orders.push_back(a - b);
 	}
 
 	// obtain the 1d polynomials in x and y, respectively

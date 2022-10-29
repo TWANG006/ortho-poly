@@ -25,8 +25,8 @@ a = floor((1 + sqrt(1 + 8*(J-1)))*0.5);
 b = (J-1) - 0.5*(a.*(a-1)) + 1;
 
 % Get n, m from a & b
-m = a - b;
-n = b - 1;
+n= a - b;
+m = b - 1;
 
 % Calculate the Legendre polynominals with thier coefficients, as well as
 % their 1st derivatives....................................................
