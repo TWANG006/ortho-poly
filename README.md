@@ -1,4 +1,4 @@
-## ortho-poly
+# ortho-poly
 
 This project provides both the MATLAB and C++ implementaitons of the orthorgonal polynomials, including
   - [x] Legendre polynomials
