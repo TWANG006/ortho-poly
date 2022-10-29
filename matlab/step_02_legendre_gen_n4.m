@@ -16,6 +16,6 @@ cols = max(b);
 colormap jet;
 for i = 1: 15
     subplot(cols, rows, rows * (a(i) - 1) + b(i));
-    imagesc(Z3(:, :, i)); axis image; set(gca, 'xtick', [], 'ytick', []);
+    imagesc(Z3(:, :, i)); axis image xy; set(gca, 'xtick', [], 'ytick', []);
     title(['Q' num2str(i)]);
 end
