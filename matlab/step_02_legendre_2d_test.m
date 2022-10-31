@@ -15,7 +15,7 @@ addpath('functions/');
 
 %% test fit
 load('../data/square_surface_60mm.mat');
-[Zfit, c] = poly_fit(X, Y, Z, 1: 15, 'legendre');
+[Zfit, c] = poly_fit(X, Y, Z * 1e9, 1: 9, 'legendre');
 Zfit_c = load_matrix('../data/Zfit.bin', 'double');
 Zdif = Zfit - Zfit_c;
 Zdif = Zdif - nanmean(Zdif);

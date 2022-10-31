@@ -11,22 +11,22 @@ function [Z, Zx, Zy, z3, zx3, zy3, m, n] = legendre_xy_jc(X, Y, J, C)
 J = J(:);
 
 % Calculate the order vectors (n, m).......................................
-% b = ceil(sqrt(J));
-% a = b.^2-J+1;
-% 
-% nsm = -a/2.*(~mod(a,2))+(a-1)/2.*(mod(a,2));
-% nam = 2*b-abs(nsm)-2;
-% 
-% n = (nam+nsm)/2;
-% m = (nam-nsm)/2;
+b = ceil(sqrt(J));
+a = b.^2-J+1;
 
-% Qj is in: row a & col b
-a = floor((1 + sqrt(1 + 8*(J-1)))*0.5);
-b = (J-1) - 0.5*(a.*(a-1)) + 1;
+nsm = -a/2.*(~mod(a,2))+(a-1)/2.*(mod(a,2));
+nam = 2*b-abs(nsm)-2;
 
-% Get n, m from a & b
-n = a - b;
-m = b - 1;
+n = (nam+nsm)/2;
+m = (nam-nsm)/2;
+
+% % Qj is in: row a & col b
+% a = floor((1 + sqrt(1 + 8*(J-1)))*0.5);
+% b = (J-1) - 0.5*(a.*(a-1)) + 1;
+% 
+% % Get n, m from a & b
+% n = a - b;
+% m = b - 1;
 
 % Calculate the Legendre polynominals with thier coefficients, as well as
 % their 1st derivatives....................................................
