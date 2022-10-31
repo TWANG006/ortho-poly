@@ -5,10 +5,6 @@ This project provides both the MATLAB and C++ implementaitons of the orthorgonal
   - [ ] Zernike polynomials
   - [ ] Chebyshev polynomials (with certain orthogonal compensation)
 
-## Decompositions
-### Legendre polynomials
-![Legendre polynomials](/images/legendre_first_15.jpg)
-
 ## Examples
 ### Legendre polynomial fitting
 ![Legendre polynomial fitting example](/images/legendre_fitting_example.jpg)
