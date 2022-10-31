@@ -20,6 +20,7 @@ public:
 	//! common methods
 	BasePolynomial& fit(const MatrixXXd& Z, const set_i& j_orders);
 	MatrixXXd predict();
+	MatrixXXd predict(const map_id& order_coeff_map);
 	MatrixXXd fit_predict(const MatrixXXd& Z, const set_i& j_orders);
 
 public:

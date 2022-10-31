@@ -43,6 +43,12 @@ MatrixXXd BasePolynomial::predict()
 	return Zfit;
 }
 
+MatrixXXd BasePolynomial::predict(const map_id& order_coeff_map)
+{
+	auto [Zfit, Ps] = gen_2d_p(order_coeff_map);
+	return Zfit;
+}
+
 MatrixXXd BasePolynomial::fit_predict(const MatrixXXd& Z, const set_i& j_orders)
 {
 	return fit(Z, j_orders).predict();
