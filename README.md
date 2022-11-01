@@ -2,7 +2,7 @@
 
 This project provides both the MATLAB and C++ implementaitons of the orthorgonal polynomials, including
   - [x] Legendre polynomials
-  - [ ] Zernike polynomials
+  - [x] Zernike polynomials
   - [ ] Chebyshev polynomials (with certain orthogonal compensation)
 
 ## Examples
