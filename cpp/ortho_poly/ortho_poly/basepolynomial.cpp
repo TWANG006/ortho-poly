@@ -84,3 +84,14 @@ VectorXd BasePolynomial::_build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z)
 	// solve the Ax = b
 	return Amap.colPivHouseholderQr().solve(bmap);
 }
+
+std::tuple<int_t, int_t> BasePolynomial::_mn_from_j(const int& j)
+{
+	auto b = int_t(ceil(sqrt(double(j))));
+	auto a = b * b - j + 1;
+
+	auto nsm = -a / 2 * ((a % 2) == 0 ? 1 : 0) + (a - 1) / 2 * (a % 2);
+	auto nam = 2 * b - abs(nsm) - 2;
+
+	return std::make_tuple((nam + nsm) / 2, (nam - nsm) / 2);
+}

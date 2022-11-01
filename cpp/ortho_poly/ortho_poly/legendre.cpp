@@ -148,21 +148,9 @@ std::tuple<MatrixXXd, vec_m> Legendre::gen_2d_p(const map_id& jorder_coeff)
 	coeffs.reserve(jorder_coeff.size());
 
 	for (const auto& jc : jorder_coeff) {
-		auto b = int_t(ceil(sqrt(double(jc.first))));
-		auto a = b * b - jc.first + 1;
-
-		auto nsm = -a / 2 * ((a % 2) == 0 ? 1 : 0) + (a - 1) / 2 * (a % 2);
-		auto nam = 2 * b - abs(nsm) - 2;
-
-		x_orders.push_back((nam + nsm) / 2);
-		y_orders.push_back((nam - nsm) / 2);
-
-		/*int_t a = int_t(floor((1 + sqrt(1 + 8.0 * (jc.first - 1))) * 0.5));
-		int_t b = (jc.first - 1) - (a * (a - 1)) / 2 + 1;
-
-		y_orders.push_back(b - 1);
-		x_orders.push_back(a - b);*/
-
+		auto [x_order, y_order] = _mn_from_j(jc.first);
+		x_orders.push_back(x_order);
+		y_orders.push_back(y_order);
 		coeffs.push_back(jc.second);
 	}
 
@@ -191,19 +179,9 @@ vec_m Legendre::gen_2d_p(const set_i& j_orders)
 	y_orders.reserve(j_orders.size());
 
 	for (const auto& j : j_orders) {
-		auto b = int_t(ceil(sqrt(double(j))));
-		auto a = b * b - j + 1;
-
-		auto nsm = -a / 2 * ((a % 2) == 0 ? 1 : 0) + (a - 1) / 2 * (a % 2);
-		auto nam = 2 * b - abs(nsm) - 2;
-
-		x_orders.push_back((nam + nsm) / 2);
-		y_orders.push_back((nam - nsm) / 2);
-		/*int_t a = int_t(floor((1 + sqrt(1 + 8.0 * (j - 1))) * 0.5));
-		int_t b = (j - 1) - (a * (a - 1)) / 2 + 1;
-
-		y_orders.push_back(b - 1);
-		x_orders.push_back(a - b);*/
+		auto [x_order, y_order] = _mn_from_j(j);
+		x_orders.push_back(x_order);
+		y_orders.push_back(y_order);
 	}
 
 	// obtain the 1d polynomials in x and y, respectively

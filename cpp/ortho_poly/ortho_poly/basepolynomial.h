@@ -17,11 +17,20 @@ public:
 	virtual BasePolynomial& operator() (const VectorXd& x);
 
 public:
-	//! common methods
+	//! fit the surface `Z` with the `j_orders` polynomials
 	BasePolynomial& fit(const MatrixXXd& Z, const set_i& j_orders);
+
+	//! predict the fitted surface using the existing (X, Y) orders and coefficients
 	MatrixXXd predict();
+
+	//! predict the fitted surface with the existing (X, Y) and the input {orders, coeff}
 	MatrixXXd predict(const map_id& order_coeff_map);
+
+	//! fit and predict based on the input surface `Z` and `j_orders`.
 	MatrixXXd fit_predict(const MatrixXXd& Z, const set_i& j_orders);
+
+	/*! Decompose the 1D order j into 2D order [n, m] in x and y directions */
+	std::tuple<int_t, int_t> _mn_from_j(const int& j);
 
 public:
 	//! Getters, for debug only. Will be deleted later.
@@ -38,7 +47,9 @@ public:
 	virtual vec_m gen_2d_p(const set_i& j_orders) = 0;
 	virtual std::tuple<MatrixXXd, vec_m> gen_2d_p(const map_id& jorder_coeff) = 0;
 
+
 private:
+	/*! Build the Ax = b linear system for polynomial fitting */
 	VectorXd _build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z);
 
 protected:
