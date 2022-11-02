@@ -17,6 +17,12 @@ public:
 	virtual BasePolynomial& operator() (const VectorXd& x);
 
 public:
+	//! Normalize the 2D coordinates [-1, 1]
+	BasePolynomial& normalize(const MatrixXXd& X, const MatrixXXd& Y);
+	
+	//! Normalize the 1D coordinates to [-1, 1]
+	BasePolynomial& normalize(const VectorXd& x);
+
 	//! fit the surface `Z` with the `j_orders` polynomials
 	BasePolynomial& fit(const MatrixXXd& Z, const set_i& j_orders);
 
@@ -39,9 +45,6 @@ public:
 	const map_id& coeffs() const { return m_order_coeff_map; }
 
 public:
-	//! interface methods
-	virtual BasePolynomial& normalize(const MatrixXXd& X, const MatrixXXd& Y) = 0;
-	virtual BasePolynomial& normalize(const VectorXd& x) = 0;
 	virtual vec_v gen_1d_p(vec_i& orders) = 0;
 	virtual std::tuple<vec_v, vec_v> gen_1d_p_dp(vec_i& orders) = 0;
 	virtual vec_m gen_2d_p(const set_i& j_orders) = 0;

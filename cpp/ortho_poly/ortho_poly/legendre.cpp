@@ -5,21 +5,6 @@ Legendre::~Legendre()
 {
 }
 
-Legendre& Legendre::normalize(const MatrixXXd& X, const MatrixXXd& Y)
-{
-	m_X = (-1 + 2 * (X.array() - X.minCoeff()) / (X.maxCoeff() - X.minCoeff())).matrix();
-	m_Y = (-1 + 2 * (Y.array() - Y.minCoeff()) / (Y.maxCoeff() - Y.minCoeff())).matrix();
-
-	return *this;
-}
-
-Legendre& Legendre::normalize(const VectorXd& x)
-{
-	m_x = (-1 + 2 * (x.array() - x.minCoeff()) / (x.maxCoeff() - x.minCoeff())).matrix();
-
-	return *this;
-}
-
 vec_v Legendre::gen_1d_p(vec_i& orders)
 {
 	// base cases

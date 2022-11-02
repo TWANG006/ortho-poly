@@ -19,6 +19,21 @@ BasePolynomial& BasePolynomial::operator()(const VectorXd& x)
 	return *this;
 }
 
+BasePolynomial& BasePolynomial::normalize(const MatrixXXd& X, const MatrixXXd& Y)
+{
+	m_X = (-1 + 2 * (X.array() - X.minCoeff()) / (X.maxCoeff() - X.minCoeff())).matrix();
+	m_Y = (-1 + 2 * (Y.array() - Y.minCoeff()) / (Y.maxCoeff() - Y.minCoeff())).matrix();
+
+	return *this;
+}
+
+BasePolynomial& BasePolynomial::normalize(const VectorXd& x)
+{
+	m_x = (-1 + 2 * (x.array() - x.minCoeff()) / (x.maxCoeff() - x.minCoeff())).matrix();
+
+	return *this;
+}
+
 BasePolynomial& BasePolynomial::fit(const MatrixXXd& Z, const set_i& j_orders)
 {
 	// generate the polynomials of the j_orders

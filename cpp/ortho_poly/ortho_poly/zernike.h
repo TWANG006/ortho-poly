@@ -6,7 +6,11 @@
 
 class ORTHOPOLY_API Zernike : public BasePolynomial
 {
-
+public:
+	Zernike() = default;
+	Zernike(const Zernike& bp) = default;
+	Zernike& operator = (const Zernike& bp) = default;
+	virtual ~Zernike();
 };
 
 #endif // !ZERNIKE_H

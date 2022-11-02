@@ -27,17 +27,6 @@ public:
 	virtual ~Legendre();
 
 public:
-	//! Normalize the 2D coordinates [-1, 1]
-	virtual Legendre& normalize(
-		const MatrixXXd& X,/*!< [in] 2D x coordinates*/
-		const MatrixXXd& Y /*!< [in] 2D y coordinates*/
-	) override;
-
-	//! Normalize the 1D coordinates to [-1, 1]
-	virtual Legendre& normalize(
-		const VectorXd& x/*!< [in] 1D x coordinates*/
-	) override;
-
 	//! Generate 1d Legendre polynomials with the orders in the `orders`
 	/*!
 	* NOTEs:
