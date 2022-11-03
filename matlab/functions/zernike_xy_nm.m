@@ -23,7 +23,7 @@ Cj = n+1j*m;
 sz = size(X);
 ln = length(n);
 [Theta, R] = cart2pol(X,Y);
-z = ZernikeRTnm(R,Theta,n,m,NormFlag);
+z = zernike_rt_nm(R,Theta,n,m,NormFlag);
 z3 = reshape(z,sz(1),sz(2),ln);
 
 % Compute the Zernike Cartesian derivatives................................

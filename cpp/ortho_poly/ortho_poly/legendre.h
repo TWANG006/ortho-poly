@@ -4,7 +4,7 @@
 #include "common.h"
 #include "basepolynomial.h"
 
-//! Class for generate and fit the unassociated Legendre polynomials
+//! Class for generating and fitting the unassociated Legendre polynomials
 /*! 
 * Details:
 *           1    n   ( n )       n-k        k

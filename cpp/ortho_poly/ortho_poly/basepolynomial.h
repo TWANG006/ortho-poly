@@ -50,7 +50,6 @@ public:
 	virtual vec_m gen_2d_p(const set_i& j_orders) = 0;
 	virtual std::tuple<MatrixXXd, vec_m> gen_2d_p(const map_id& jorder_coeff) = 0;
 
-
 private:
 	/*! Build the Ax = b linear system for polynomial fitting */
 	VectorXd _build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z);

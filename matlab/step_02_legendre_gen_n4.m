@@ -5,11 +5,18 @@ clc;
 addpath('functions/');
 
 [X, Y] = meshgrid(-1: 0.01: 1, -1: 0.01: 1);
-J = 1: 15;
+J = 1: 16;
 
-[~, ~, ~, Z3, ~, ~] = legendre_xy_jc(X, Y, [1: 15], ones(15, 1));
-a = floor((1 + sqrt(1 + 8*(J-1)))*0.5);
-b = (J-1) - 0.5*(a.*(a-1)) + 1;
+[~, ~, ~, Z3, ~, ~] = legendre_xy_jc(X, Y, J, ones(size(J)));
+
+b = ceil(sqrt(J));
+a = b.^2-J+1;
+
+nsm = -a/2.*(~mod(a,2))+(a-1)/2.*(mod(a,2));
+nam = 2*b-abs(nsm)-2;
+
+
+%% plotting
 figure;
 rows = max(a);
 cols = max(b);
