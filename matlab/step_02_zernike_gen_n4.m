@@ -7,7 +7,7 @@ addpath('functions/');
 [X, Y] = meshgrid(-1: 0.01: 1, -1: 0.01: 1);
 J = 1: 16;
 
-[~, ~, ~, Z3, ~, ~] = legendre_xy_jc(X, Y, J, ones(length(J), 1));
+[~, ~, ~, Z3, ~, ~] = zernike_xy_jc(X, Y, J, ones(length(J), 1));
 
 
 %% plots

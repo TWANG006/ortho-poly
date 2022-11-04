@@ -26,10 +26,12 @@ public:
 	virtual ~Zernike();
 
 public:
-	virtual vec_v gen_1d_p(vec_i& orders) override;
-	virtual std::tuple<vec_v, vec_v> gen_1d_p_dp(vec_i& orders) override;
 	virtual vec_m gen_2d_p(const set_i& j_orders) override;
 	virtual std::tuple<MatrixXXd, vec_m> gen_2d_p(const map_id& jorder_coeff) override;
+
+private:
+	//! precompute the powers of the r vector
+	map_iv _precompute_r_powers(const VectorXd& r, vec_i m, vec_i n);
 };
 
 #endif // !ZERNIKE_H
