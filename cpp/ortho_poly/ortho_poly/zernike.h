@@ -32,6 +32,7 @@ public:
 private:
 	//! precompute the powers of the r vector
 	map_iv _precompute_r_powers(const VectorXd& r, vec_i m, vec_i n);
+	double _factorial(const unsigned long long& n);
 };
 
 #endif // !ZERNIKE_H

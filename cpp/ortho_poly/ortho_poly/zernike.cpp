@@ -34,3 +34,8 @@ map_iv Zernike::_precompute_r_powers(const VectorXd& r, vec_i m, vec_i n)
 	return r_power_map;
 }
 
+double Zernike::_factorial(const unsigned long long& n)
+{
+	
+}
+
