@@ -7,15 +7,12 @@ Zernike::~Zernike()
 
 vec_m Zernike::gen_2d_p(const set_i& j_orders)
 {
-	// obtain the m, n orders, respectively
-	vec_i m_orders, n_orders;
-	m_orders.reserve(j_orders.size());
-	n_orders.reserve(j_orders.size());
+	// convert to polar coordinates
 
+	// obtain the m, n orders, respectively
 	for (const auto& j : j_orders) {
 		auto [m_order, n_order] = _mn_from_j(j);
-		m_orders.push_back(m_order);
-		n_orders.push_back(n_order);
+		
 	}
 
 	return vec_m();

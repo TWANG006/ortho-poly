@@ -21,8 +21,16 @@ using vec_v = std::vector<VectorXd>;
 using vec_m = std::vector<MatrixXXd>;
 using map_id = std::map<int_t, double>;
 using map_iv = std::map<int_t, VectorXd>;
-inline int_t ID_1D(int_t x, int_t y, int_t width) { return (y * width + x); }
 
+// functions
+inline int_t ID_1D(int_t x, int_t y, int_t width) { return (y * width + x); }
+inline std::tuple<MatrixXXd, MatrixXXd> cart2pol(const MatrixXXd& X, const MatrixXXd& Y)
+{
+	return std::make_tuple(
+		(X.array().square() + Y.array().square()).sqrt().matrix(),
+		Y.binaryExpr(X, [](double a, double b) {return std::atan2(a, b); })
+	);
+}
 
 #endif // !COMMON_H
 
