@@ -21,6 +21,8 @@ using vec_v = std::vector<VectorXd>;
 using vec_m = std::vector<MatrixXXd>;
 using map_id = std::map<int_t, double>;
 using map_iv = std::map<int_t, VectorXd>;
+using ii = std::pair<int_t, int_t>;
+using map_iim = std::map<ii, MatrixXXd>;
 
 // functions
 inline int_t ID_1D(int_t x, int_t y, int_t width) { return (y * width + x); }
