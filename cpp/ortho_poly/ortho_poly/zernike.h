@@ -29,6 +29,9 @@ public:
 	virtual vec_m gen_2d_p(const set_i& j_orders) override;
 	virtual std::tuple<MatrixXXd, vec_m> gen_2d_p(const map_id& jorder_coeff) override;
 
+protected:
+	virtual std::tuple<int_t, int_t> _mn_from_j(const int& j) override;
+
 };
 
 #endif // !ZERNIKE_H

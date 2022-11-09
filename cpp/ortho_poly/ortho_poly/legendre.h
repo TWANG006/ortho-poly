@@ -26,7 +26,9 @@ public:
 	Legendre& operator=(const Legendre& lg) = default;
 	virtual ~Legendre();
 
-public:
+protected:
+	virtual std::tuple<int_t, int_t> _mn_from_j(const int& j) override;
+
 	//! Generate 1d Legendre polynomials with the orders in the `orders`
 	/*!
 	* NOTEs:

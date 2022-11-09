@@ -5,6 +5,17 @@ Legendre::~Legendre()
 {
 }
 
+std::tuple<int_t, int_t> Legendre::_mn_from_j(const int& j)
+{
+	auto b = int_t(ceil(sqrt(double(j))));
+	auto a = b * b - j + 1;
+
+	auto nsm = -a / 2 * ((a % 2) == 0 ? 1 : 0) + (a - 1) / 2 * (a % 2);
+	auto nam = 2 * b - abs(nsm) - 2;
+
+	return std::make_tuple((nam + nsm) / 2, (nam - nsm) / 2);
+}
+
 vec_v Legendre::gen_1d_p(vec_i& orders)
 {
 	// base cases
