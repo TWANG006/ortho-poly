@@ -32,6 +32,15 @@ public:
 protected:
 	virtual std::tuple<int_t, int_t> _mn_from_j(const int& j) override;
 
+private:
+	virtual vec_v gen_1d_p(vec_i& orders) override { return vec_v(); };
+	virtual std::tuple<vec_v, vec_v> gen_1d_p_dp(vec_i& orders) override { return std::tuple<vec_v, vec_v>(); };
+	MatrixXXd _calculate_Rmn(
+		map_iim& mn_p_map, 
+		const MatrixXXd& R,
+		const MatrixXXd& R0, 
+		const int_t& m_order, 
+		const int_t& n_order);
 };
 
 #endif // !ZERNIKE_H

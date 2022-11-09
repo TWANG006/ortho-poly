@@ -16,37 +16,23 @@ vec_m Zernike::gen_2d_p(const set_i& j_orders)
 	MatrixXXd R0 = MatrixXXd::Zero(m_X.rows(), m_X.cols());
 
 	// calculate the polynomials for j_orders
-	vec_m Rs;
-	Rs.reserve(j_orders.size());
+	vec_m Zs;
+	Zs.reserve(j_orders.size());
 	for (const auto& j : j_orders) {
 		// convert j to m, n
 		auto [m_order, n_order] = _mn_from_j(j);
 
 		// calculate R_mn
-		MatrixXXd R_mn;
-		for (auto m_plus_n = 2; m_plus_n < m_order + n_order; m_plus_n += 2) {
-			for (auto n = 1; n < n_order; n++) {
-				auto m = m_plus_n - n;
-				if (m < 0) break;
-				else if (n < m) continue;
-				else {
-					if (mn_p_map.find(std::make_pair(m, n)) == mn_p_map.end()) {
-						R_mn = (
-							R.array() * (
-								((n - 1 < abs(m - 1)) ? R0 : mn_p_map[std::make_pair(abs(m - 1), n - 1)]) +
-								((n - 1 < m + 1) ? R0 : mn_p_map[std::make_pair(m + 1, n - 1)])
-								).array() -
-							((n - 2 < m + 1) ? R0 : mn_p_map[std::make_pair(abs(m + 1), n - 2)]).array()
-							).matrix();
-						mn_p_map[std::make_pair(m, n)] = R_mn;
-					}
-				}
-			}
+		MatrixXXd R_mn = _calculate_Rmn(mn_p_map, R, R0, abs(m_order), n_order);
+		if (m_order < 0) {
+			Zs.push_back((R_mn.array() * (Theta.array() * (-m_order)).sin()).matrix());
 		}
-		Rs.push_back(R_mn);
+		else {
+			Zs.push_back((R_mn.array() * (Theta.array() * (m_order)).cos()).matrix());
+		}
 	}
 
-	return Rs;
+	return Zs;
 }
 
 std::tuple<MatrixXXd, vec_m> Zernike::gen_2d_p(const map_id& jorder_coeff)
@@ -63,6 +49,40 @@ std::tuple<int_t, int_t> Zernike::_mn_from_j(const int& j)
 	auto n = 2 * b - abs(m) - 2;
 
 	return std::make_tuple(m, n);
+}
+
+MatrixXXd Zernike::_calculate_Rmn(map_iim& mn_p_map, const MatrixXXd& R, const MatrixXXd& R0, const int_t& m_order, const int_t& n_order)
+{
+	if (mn_p_map.find(std::make_pair(m_order, n_order)) != mn_p_map.end())
+	{
+		return mn_p_map[std::make_pair(m_order, n_order)];
+	}
+	else {
+		MatrixXXd R_mn;
+		for (auto m_plus_n = 2; m_plus_n <= m_order + n_order; m_plus_n += 2) {
+			for (auto n = 1; n <= n_order; n++) {
+				auto m = m_plus_n - n;
+				if (m < 0) break;
+				else if (n < m) continue;
+				else {
+					if (mn_p_map.find(std::make_pair(m, n)) == mn_p_map.end()) {
+						R_mn = (
+							R.array() * (
+								((n - 1 < abs(m - 1)) ? R0 : mn_p_map[std::make_pair(abs(m - 1), n - 1)]) +
+								((n - 1 < m + 1) ? R0 : mn_p_map[std::make_pair(m + 1, n - 1)])
+								).array() -
+							((n - 2 < m) ? R0 : mn_p_map[std::make_pair(m, n - 2)]).array()
+							).matrix();
+						mn_p_map[std::make_pair(m, n)] = R_mn;
+					}
+					else {
+						R_mn = mn_p_map[std::make_pair(m, n)];
+					}
+				}
+			}
+		}
+		return R_mn;
+	}
 }
 
 

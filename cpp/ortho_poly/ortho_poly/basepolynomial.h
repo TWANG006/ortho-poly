@@ -42,7 +42,7 @@ public:
 	const map_id& coeffs() const { return m_order_coeff_map; }
 
 public:
-	virtual vec_v gen_1d_p(vec_i& orders) = 0;
+	virtual vec_v gen_1d_p(vec_i& orders) = 0 ;
 	virtual std::tuple<vec_v, vec_v> gen_1d_p_dp(vec_i& orders) = 0;
 	virtual vec_m gen_2d_p(const set_i& j_orders) = 0;
 	virtual std::tuple<MatrixXXd, vec_m> gen_2d_p(const map_id& jorder_coeff) = 0;
