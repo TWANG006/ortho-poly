@@ -29,10 +29,6 @@ public:
 	virtual vec_m gen_2d_p(const set_i& j_orders) override;
 	virtual std::tuple<MatrixXXd, vec_m> gen_2d_p(const map_id& jorder_coeff) override;
 
-private:
-	//! precompute the powers of the r vector
-	map_iv _precompute_r_powers(const VectorXd& r, vec_i m, vec_i n);
-	double _factorial(const unsigned long long& n);
 };
 
 #endif // !ZERNIKE_H
