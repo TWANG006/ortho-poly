@@ -37,7 +37,36 @@ vec_m Zernike::gen_2d_p(const set_i& j_orders)
 
 std::tuple<MatrixXXd, vec_m> Zernike::gen_2d_p(const map_id& jorder_coeff)
 {
-	return std::tuple<MatrixXXd, vec_m>();
+	// convert to polar coordinates
+	auto [R, Theta] = cart2pol(m_X, m_Y);
+
+	// memorize the already calculated polynomials
+	map_iim mn_p_map;
+	mn_p_map[std::make_pair(0, 0)] = MatrixXXd::Ones(m_X.rows(), m_X.cols());
+	MatrixXXd R0 = MatrixXXd::Zero(m_X.rows(), m_X.cols());
+
+	// calculate the polynomials for j_orders
+	vec_m Zs;
+	MatrixXXd Z = MatrixXXd::Zero(m_X.rows(), m_X.cols());
+	Zs.reserve(jorder_coeff.size());
+	for (const auto& jc : jorder_coeff) {
+		// convert j to m, n
+		auto [m_order, n_order] = _mn_from_j(jc.first);
+
+		// calculate R_mn
+		MatrixXXd R_mn = _calculate_Rmn(mn_p_map, R, R0, abs(m_order), n_order);
+		if (m_order < 0) {
+			Zs.push_back((R_mn.array() * (Theta.array() * (-m_order)).sin()).matrix());
+		}
+		else {
+			Zs.push_back((R_mn.array() * (Theta.array() * (m_order)).cos()).matrix());
+		}
+
+		// multiply the coefficients
+		Z += jc.second * Zs.back();
+	}
+
+	return std::make_tuple(Z, Zs);
 }
 
 std::tuple<int_t, int_t> Zernike::_mn_from_j(const int& j)
