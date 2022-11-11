@@ -15,7 +15,7 @@ addpath('functions/');
 
 %% test fit
 load('../data/square_surface_60mm.mat');
-[Zfit, c] = poly_fit(X, Y, Z * 1e9, 1: 9, 'legendre');
+[Zfit, c] = poly_fit(X, Y, Z, 1: 16, 'legendre');
 Zfit_c = load_matrix('../data/Zfit.bin', 'double');
 Zdif = Zfit - Zfit_c;
 Zdif = Zdif - nanmean(Zdif);
@@ -34,6 +34,6 @@ figure;
 subplot(1, 3, 1);
 show_surface(X, Y, Z, 1e9, 'nm', 'Input surface');
 subplot(1, 3, 2);
-show_surface(X, Y, Zfit_c, 1e9, 'nm', 'Fit with Q1 ~ Q15');
+show_surface(X, Y, Zfit_c, 1e9, 'nm', 'Fit with Q1 ~ Q16');
 subplot(1, 3, 3);
 show_surface(X, Y, Zfit - Z, 1e9, 'nm', 'Difference');

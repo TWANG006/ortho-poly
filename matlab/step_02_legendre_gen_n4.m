@@ -18,11 +18,29 @@ nam = 2*b-abs(nsm)-2;
 
 %% plotting
 figure;
-rows = max(a);
-cols = max(b);
 colormap jet;
-for i = 1: 15
-    subplot(cols, rows, rows * (a(i) - 1) + b(i));
-    imagesc(Z3(:, :, i)); axis image xy; set(gca, 'xtick', [], 'ytick', []);
-    title(['Q' num2str(i)]);
+rows = sqrt(length(J));
+cols = 2 * rows - 1;
+
+for i = 1: sqrt(length(J))
+    curr_col = 2*i - 1;
+    cen = i^2;
+    cen_id = (i - 1) * cols + (cols + 1) / 2;
+    
+    subplot(rows, cols, cen_id);
+    Z = Z3(:, :, cen);
+    imagesc(Z); axis image xy; set(gca, 'xtick', [], 'ytick', []);
+    title(['Q' num2str(cen)]);
+    
+    for j = 1: (curr_col - 1)/2
+        subplot(rows, cols, cen_id + j);
+        Z = Z3(:, :, cen - 2 * j);
+        imagesc(Z); axis image xy; set(gca, 'xtick', [], 'ytick', []);
+        title(['Q' num2str(cen - 2 * j)]);
+        
+        subplot(rows, cols, cen_id - j);
+        Z = Z3(:, :, cen - 2 * j + 1);
+        imagesc(Z); axis image xy; set(gca, 'xtick', [], 'ytick', []);
+        title(['Q' num2str(cen - 2 * j + 1)]);
+    end    
 end

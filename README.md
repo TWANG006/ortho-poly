@@ -9,6 +9,9 @@ This project provides both the MATLAB and C++ implementaitons of the orthorgonal
 ### Legendre polynomial fitting
 ![Legendre polynomial fitting example](/images/legendre_fitting_example.jpg)
 
+### Zernike polynomial fitting
+![Zernike polynomial fitting example](/images/zernike_fitting_example.jpg)
+
 ## Collaborators
 <!-- readme: collaborators -start -->
 <table>
