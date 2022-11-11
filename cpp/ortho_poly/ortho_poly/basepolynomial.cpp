@@ -55,12 +55,30 @@ BasePolynomial& BasePolynomial::fit(const MatrixXXd& Z, const set_i& j_orders)
 MatrixXXd BasePolynomial::predict()
 {
 	auto [Zfit, Ps] = gen_2d_p(m_order_coeff_map);
+
+	for (auto i = 0; i < Zfit.rows(); i++) {
+		for (auto j = 0; j < Zfit.cols(); j++) {
+			if (m_is_valid_id[ID_1D(j, i, Zfit.cols())] == false) {
+				Zfit(i, j) = NAN;
+			}
+		}
+	}
+
 	return Zfit;
 }
 
 MatrixXXd BasePolynomial::predict(const map_id& order_coeff_map)
 {
 	auto [Zfit, Ps] = gen_2d_p(order_coeff_map);
+
+	for (auto i = 0; i < Zfit.rows(); i++) {
+		for (auto j = 0; j < Zfit.cols(); j++) {
+			if (m_is_valid_id[ID_1D(j, i, Zfit.cols())] == false) {
+				Zfit(i, j) = NAN;
+			}
+		}
+	}
+
 	return Zfit;
 }
 
@@ -75,17 +93,22 @@ VectorXd BasePolynomial::_build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z)
 	vec_d A, b;
 	A.reserve(Z.size() * Ps.size());
 	b.reserve(Z.size());
+	m_is_valid_id.resize(Z.size());
 
 	// build A and b
 	for (auto i = 0; i < Z.rows(); i++) {
 		for (auto j = 0; j < Z.cols(); j++) {
 			if (isfinite(Z(i, j))) {
+				m_is_valid_id[ID_1D(j, i, Z.cols())] = true;
 				// build one row of A
 				for (const auto& P : Ps) {
 					A.push_back(P(i, j));
 				}
 				// build one element of b
 				b.push_back(Z(i, j));
+			}
+			else {
+				m_is_valid_id[ID_1D(j, i, Z.cols())] = false;
 			}
 		}
 	}
@@ -94,7 +117,7 @@ VectorXd BasePolynomial::_build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z)
 	auto m = b.size();
 	auto n = A.size() / m;
 	MatrixMapd Amap(A.data(), m, n);
-	VectorMapd bmap(b.data(), m, n);
+	VectorMapd bmap(b.data(), m);
 
 	// solve the Ax = b
 	return Amap.colPivHouseholderQr().solve(bmap);

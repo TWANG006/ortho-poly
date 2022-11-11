@@ -56,10 +56,11 @@ private:
 	VectorXd _build_solve_Axb(const vec_m& Ps, const MatrixXXd& Z);
 
 protected:
-	VectorXd m_x;/*!< 1d Cartesian coordinates*/
+	VectorXd m_x;/*!< 1d Cartesian coordinates */
 	MatrixXXd m_X;/*!< 2d Cartesian X */
-	MatrixXXd m_Y;/*!< 2d Cartesian Y*/
-	map_id m_order_coeff_map;/*!< ordered (order, coeff) pair*/
+	MatrixXXd m_Y;/*!< 2d Cartesian Y */
+	std::vector<bool> m_is_valid_id;/*!< valid id of the Z */
+	map_id m_order_coeff_map;/*!< ordered (order, coeff) pair */
 };
 
 #endif // !BASE_POLYNOMIAL_H

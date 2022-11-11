@@ -25,6 +25,7 @@ for i = 1:length(c)
 end
 
 Zfit = sum(Z3,3);
+Zfit(isnan(Z)) = NaN;
 
 
 end
